@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fuga Arquitetura</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gabarito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Gabarito', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .project-item {
+            transition: all 0.3s ease;
+        }
+        .project-item:hover {
+            transform: translateY(-5px);
+        }
+        .project-overlay {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .project-item:hover .project-overlay {
+            opacity: 1;
+        }
+        .menu-link::after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 2px;
+            background: black;
+            transition: width 0.3s;
+        }
+        .menu-link:hover::after {
+            width: 100%;
+        }
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+        .mobile-menu.open {
+            transform: translateX(0);
+        }
+        .carousel-slide {
+            transition: opacity 1s ease-in-out;
+        }
+        .carousel-slide.active {
+            opacity: 1;
+            z-index: 1;
+        }
+        .carousel-slide:not(.active) {
+            opacity: 0;
+            z-index: 0;
+        }
+        .rounded-corners {
+            border-radius: 2px;
+        }
+    </style>
+</head>
+<body class="bg-white text-black">
+    <!-- Header -->
+    <header class="fixed w-full bg-white z-50 shadow-sm">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <!-- Logo SVG -->
+                <div class="flex items-center">
+                    <img src="imagens/logos/FUGA_LogoHorizontal_Preto.svg" 
+                        alt="Fuga Arquitetura" 
+                        width="180"
+                        height="40" 
+                        class="logo-header">
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#home" class="menu-link font-medium">Início</a>
+                    <a href="#about" class="menu-link font-medium">Escritório</a>
+                    <a href="#team" class="menu-link font-medium">Equipe</a>
+                    <a href="#gallery" class="menu-link font-medium">Projetos</a>
+                    <a href="#contact" class="menu-link font-medium">Contato</a>
+                </nav>
+                
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-button" class="md:hidden focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="mobile-menu fixed inset-0 bg-white z-40 pt-20 px-6 md:hidden">
+        <div class="flex flex-col space-y-6 text-xl">
+            <a href="#home" class="border-b border-gray-200 pb-2">Início</a>
+            <a href="#about" class="border-b border-gray-200 pb-2">Escritório</a>
+            <a href="#team" class="border-b border-gray-200 pb-2">Equipe</a>
+            <a href="#gallery" class="border-b border-gray-200 pb-2">Projetos</a>
+            <a href="#contact" class="border-b border-gray-200 pb-2">Contato</a>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="pt-32 pb-20 md:pt-40 md:pb-32 px-6">
+        <div class="container mx-auto">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-12 md:mb-0">
+                    <h1 class="text-4xl md:text-6xl font-black leading-tight mb-6">
+                        ARQUITETURA <br>E DESIGN <br>DE INTERIORES
+                    </h1>
+                    <p class="text-lg md:text-xl mb-8 max-w-lg">
+                        Criamos espaços que inspiram e transformam a maneira como vivemos.
+                    </p>
+                    <a href="#contact" class="bg-black text-white px-8 py-3 font-bold inline-block hover:bg-gray-900 transition rounded-corners">
+                        Fale conosco
+                    </a>
+                </div>
+                <div class="md:w-1/2 relative h-96 md:h-[32rem] overflow-hidden rounded-corners">
+                    <!-- Carousel Slides -->
+                    <div class="absolute inset-0 carousel-slide active">
+                        <img 
+                            src="imagens/carrossel/carrossel1.jpg" 
+                            alt=""
+                            class="h-full w-full object-cover rounded-corners"
+                            loading="eager" <!-- Carrega primeiro por ser acima do fold -->
+                        >
+                    </div>
+                    <div class="absolute inset-0 carousel-slide">
+                        <img 
+                            src="imagens/carrossel/carrossel2.jpg" 
+                            alt=""
+                            class="h-full w-full object-cover rounded-corners"
+                            loading="eager" <!-- Carrega primeiro por ser acima do fold -->
+                        >
+                    </div>
+                    <div class="absolute inset-0 carousel-slide">
+                        <img 
+                            src="imagens/carrossel/carrossel3.jpg" 
+                            alt=""
+                            class="h-full w-full object-cover rounded-corners"
+                            loading="eager" <!-- Carrega primeiro por ser acima do fold -->
+                        >
+                    </div>
+                    <div class="absolute inset-0 carousel-slide">
+                        <img 
+                            src="imagens/carrossel/carrossel4.jpg" 
+                            alt=""
+                            class="h-full w-full object-cover rounded-corners"
+                            loading="eager" <!-- Carrega primeiro por ser acima do fold -->
+                        >
+                    </div>
+                    
+                    <!-- Carousel Controls -->
+                    <div class="absolute bottom-4 left-0 right-0 flex justify-center space-x-2 z-10">
+                        <button class="carousel-dot w-3 h-3 rounded-full bg-white opacity-50" data-slide="0"></button>
+                        <button class="carousel-dot w-3 h-3 rounded-full bg-white opacity-50" data-slide="1"></button>
+                        <button class="carousel-dot w-3 h-3 rounded-full bg-white opacity-50" data-slide="2"></button>
+                        <button class="carousel-dot w-3 h-3 rounded-full bg-white opacity-50" data-slide="3"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row">
+                <div class="md:w-1/2 mb-12 md:mb-0 md:pr-12">
+                    <h2 class="text-3xl md:text-4xl font-black mb-6">O ESCRITÓRIO</h2>
+                    <p class="text-lg mb-6">
+                        Fundado em 2025, o Fuga Arquitetura se dedica a criar projetos arquitetônicos e de interiores que unem funcionalidade, estética e inovação.
+                    </p>
+                    <p class="text-lg mb-6">
+                        Nossa abordagem combina técnicas tradicionais com tecnologias contemporâneas, resultando em espaços únicos que refletem a personalidade de cada cliente.
+                    </p>
+                    <p class="text-lg">
+                        Localizado em Curitiba-PR, nosso escritório é um espaço de criação e colaboração, onde cada projeto é tratado com atenção aos detalhes e compromisso com a excelência.
+                    </p>
+                </div>
+                <div class="md:w-1/2">
+                    <div class="grid grid-cols-2 gap-4">
+                        <!-- Imagem 1 -->
+                        <div class="relative group overflow-hidden rounded-corners">
+                            <img 
+                                src="imagens/carrossel/carrossel1.jpg" 
+                                alt=""
+                                class="h-64 w-full object-cover rounded-corners transition-transform duration-300 group-hover:scale-105"
+                                loading="lazy"
+                            >
+                        </div>
+                        <!-- Imagem 2 -->
+                        <div class="relative group overflow-hidden rounded-corners">
+                            <img 
+                                src="imagens/carrossel/carrossel2.jpg" 
+                                alt=""
+                                class="h-64 w-full object-cover rounded-corners transition-transform duration-300 group-hover:scale-105"
+                                loading="lazy"
+                            >
+                        </div>
+                        <!-- Imagem 3 -->
+                        <div class="relative group overflow-hidden rounded-corners">
+                            <img 
+                                src="imagens/carrossel/carrossel3.jpg" 
+                                alt=""
+                                class="h-64 w-full object-cover rounded-corners transition-transform duration-300 group-hover:scale-105"
+                                loading="lazy"
+                            >
+                        </div>
+                        <!-- Imagem 4 -->
+                        <div class="relative group overflow-hidden rounded-corners">
+                            <img 
+                                src="imagens/carrossel/carrossel4.jpg" 
+                                alt=""
+                                class="h-64 w-full object-cover rounded-corners transition-transform duration-300 group-hover:scale-105"
+                                loading="lazy"
+                            >
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="py-20">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-black mb-16 text-center">NOSSA EQUIPE</h2>
+            
+            <div class="grid md:grid-cols-2 gap-12 max-w-4xl mx-auto">
+                <!-- Team Member 1 -->
+                <div class="text-center">
+                        <div class="relative h-64 w-64 mx-auto mb-6 group">
+                            <img
+                                src="imagens/membros/richard_lins.jpg" 
+                                alt="Richard Lins - Arquiteto Sócio Diretor"
+                                class="h-full w-full object-cover rounded-corners transition-transform duration-300 group-hover:scale-105"
+                                loading="lazy"
+                            >
+                        </div>
+                    <h3 class="text-xl font-bold mb-2">Richard Lins</h3>
+                    <p class="text-gray-700 mb-2">Arquiteto - Sócio Diretor</p>
+                    <p class="text-sm">
+                        Formado pela PUCPR em 2014. Mestre em Arquitetura e Urbanismo pela UFF em 2018. Doutor em Planejamento Urbano e Regional pelo IPPUR-UFRJ em 2025. Possui grande experiência em projetos de incorporação, arquitetura e técnologias OpenBIM.
+                    </p>
+                </div>
+                
+                <!-- Team Member 2 -->
+                <div class="text-center">
+                    <div class="relative h-64 w-64 mx-auto mb-6 group">
+                            <img
+                                src="imagens/membros/thiago_suzuki.jpg" 
+                                alt="Thiago Suzuki - Arquiteto Sócio Diretor"
+                                class="h-full w-full object-cover rounded-corners transition-transform duration-300 group-hover:scale-105"
+                                loading="lazy"
+                            >
+                        </div>
+                    <h3 class="text-xl font-bold mb-2">Thiago Suzuki</h3>
+                    <p class="text-gray-700 mb-2">Arquiteto - Sócio Diretor</p>
+                    <p class="text-sm">
+                        Arquiteto e urbanista formado pela universidade tecnologica federal do paraná. Entusiasta de inovação e tecnologia. Experiencias aprofundadas em desenvolvimento de projetos em plataformas BIM, prototipagem e fabricação de móveis e peças de design autoral.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-black mb-6">PROJETOS</h2>
+            <p class="text-lg mb-12 max-w-2xl">
+                Explore nossa coleção de projetos arquitetônicos e de interiores realizados ao longo dos anos.
+            </p>
+            
+            <!-- Gallery Navigation -->
+            <div class="flex space-x-4 mb-12 overflow-x-auto pb-2">
+                <button data-year="all" class="gallery-filter px-4 py-2 bg-black text-white font-bold rounded-corners">Todos</button>
+                <button data-year="2025" class="gallery-filter px-4 py-2 border border-black font-medium hover:bg-gray-100 rounded-corners">2025</button>
+                <button data-year="2024" class="gallery-filter px-4 py-2 border border-black font-medium hover:bg-gray-100 rounded-corners">2024</button>
+                <button data-year="2023" class="gallery-filter px-4 py-2 border border-black font-medium hover:bg-gray-100 rounded-corners">2023</button>
+                <button data-year="2022" class="gallery-filter px-4 py-2 border border-black font-medium hover:bg-gray-100 rounded-corners">2022</button>
+                <button data-year="2021" class="gallery-filter px-4 py-2 border border-black font-medium hover:bg-gray-100 rounded-corners">2021</button>
+                <button data-year="2020" class="gallery-filter px-4 py-2 border border-black font-medium hover:bg-gray-100 rounded-corners">2020</button>
+                <button data-year="2019" class="gallery-filter px-4 py-2 border border-black font-medium hover:bg-gray-100 rounded-corners">2019</button>
+                <button data-year="2015" class="gallery-filter px-4 py-2 border border-black font-medium hover:bg-gray-100 rounded-corners">2015</button>
+            </div>
+            
+            <!-- Gallery Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Project 1 -->
+                <a href="projeto1.html" class="project-item" data-year="2019">
+                    <div class="relative overflow-hidden rounded-corners">
+                        <img 
+                            src="imagens/projetos/projeto1/projeto1.jpg" 
+                            alt="Residência Vieira - Curitiba"
+                            class="h-80 w-full object-cover rounded-corners transition-transform duration-300 hover:scale-105"
+                            loading="lazy"
+                        >
+                        <div class="project-overlay absolute inset-0 bg-black bg-opacity-70 flex items-center justify-center rounded-corners">
+                            <div class="text-center text-white p-4">
+                                <h3 class="text-xl font-bold mb-2">Residência Vieira</h3>
+                                <p class="text-sm">Curitiba-PR | 2019</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                
+                <!-- Project 2 -->
+                <a href="projeto2.html" class="project-item" data-year="2015">
+                    <div class="relative overflow-hidden rounded-corners">
+                        <img 
+                            src="imagens/projetos/projeto2/projeto2.jpg" 
+                            alt="Edifício Residencial Manoel Ribas - Irapejara do Oeste/PR"
+                            class="h-80 w-full object-cover rounded-corners transition-transform duration-300 hover:scale-105"
+                            loading="lazy"
+                        >
+                        <div class="project-overlay absolute inset-0 bg-black bg-opacity-70 flex items-center justify-center rounded-corners">
+                            <div class="text-center text-white p-4">
+                                <h3 class="text-xl font-bold mb-2">Edifício Residencial Manoel Ribas</h3>
+                                <p class="text-sm">Irapejara do Oeste-PR | 2015</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="projetos.html" class="border border-black px-8 py-3 font-bold inline-block hover:bg-gray-100 transition rounded-corners">
+                    Ver mais projetos
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row">
+                <div class="md:w-1/2 mb-12 md:mb-0 md:pr-12">
+                    <h2 class="text-3xl md:text-4xl font-black mb-6">CONTATO</h2>
+                    <p class="text-lg mb-8 max-w-lg">
+                        Entre em contato para discutir seu projeto ou agendar uma visita ao nosso escritório.
+                    </p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="mr-4 mt-1">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg">Endereço</h3>
+                                <p>Rua Vital Brasil, 455<br>Curitiba-PR</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="mr-4 mt-1">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg">Telefone</h3>
+                                <p>(41) 99931-0056</p>
+                                <p>(41) 99934-3061
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="mr-4 mt-1">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg">Email</h3>
+                                <p>contato@fuga.arq.br</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="md:w-1/2 relative h-96 md:h-[32rem] overflow-hidden rounded-corners">
+                    <!-- Carousel Slides -->
+                    <div class="absolute inset-0 carousel-slide active">
+                        <img 
+                            src="imagens/carrossel/carrossel1.jpg" 
+                            alt="Imagem 1 do escritório"
+                            class="h-full w-full object-cover rounded-corners"
+                            loading="lazy"
+                        >
+                    </div>
+                    <div class="absolute inset-0 carousel-slide">
+                        <img 
+                            src="imagens/carrossel/carrossel2.jpg" 
+                            alt="Imagem 2 do escritório"
+                            class="h-full w-full object-cover rounded-corners"
+                            loading="lazy"
+                        >
+                    </div>
+                    <div class="absolute inset-0 carousel-slide">
+                        <img 
+                            src="imagens/carrossel/carrossel3.jpg" 
+                            alt="Imagem 3 do escritório"
+                            class="h-full w-full object-cover rounded-corners"
+                            loading="lazy"
+                        >
+                    </div>
+                    <div class="absolute inset-0 carousel-slide">
+                        <img 
+                            src="imagens/carrossel/carrossel4.jpg" 
+                            alt="Imagem 4 do escritório"
+                            class="h-full w-full object-cover rounded-corners"
+                            loading="lazy"
+                        >
+                    </div>
+                    
+                    <!-- Carousel Controls -->
+                    <div class="absolute bottom-4 left-0 right-0 flex justify-center space-x-2 z-10">
+                        <button class="carousel-dot w-3 h-3 rounded-full bg-white opacity-50" data-slide="0"></button>
+                        <button class="carousel-dot w-3 h-3 rounded-full bg-white opacity-50" data-slide="1"></button>
+                        <button class="carousel-dot w-3 h-3 rounded-full bg-white opacity-50" data-slide="2"></button>
+                        <button class="carousel-dot w-3 h-3 rounded-full bg-white opacity-50" data-slide="3"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <!-- Logo SVG -->
+                    <img src="imagens/logos/FUGA_LogoHorizontal_Branco.png" 
+                        alt="Fuga Arquitetura" 
+                        width="180"
+                        height="40" 
+                        class="logo-header">
+                    <p class="text-gray-400 mt-2">Arquitetura e Design de Interiores</p>
+                </div>
+                
+                <div class="flex space-x-6">
+                    <a href="#" class="hover:text-gray-300 transition">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"></path>
+                        </svg>
+                    </a>
+                    <a href="#" class="hover:text-gray-300 transition">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z"></path>
+                        </svg>
+                    </a>
+                    <a href="#" class="hover:text-gray-300 transition">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between">
+                <p class="text-gray-400 mb-4 md:mb-0">© 2025 Fuga Arquitetura. Todos os direitos reservados.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-white transition">Política de Privacidade</a>
+                    <a href="#" class="text-gray-400 hover:text-white transition">Termos de Serviço</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('open');
+        });
+        
+        // Close mobile menu when clicking on a link
+        const mobileMenuLinks = document.querySelectorAll('#mobile-menu a');
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('open');
+            });
+        });
+        
+        // Gallery Filter
+        const galleryFilters = document.querySelectorAll('.gallery-filter');
+        const projectItems = document.querySelectorAll('.project-item');
+        
+        galleryFilters.forEach(filter => {
+            filter.addEventListener('click', () => {
+                const year = filter.getAttribute('data-year');
+                
+                // Update active filter
+                galleryFilters.forEach(f => {
+                    if (f === filter) {
+                        f.classList.add('bg-black', 'text-white');
+                        f.classList.remove('border', 'hover:bg-gray-100');
+                    } else {
+                        f.classList.remove('bg-black', 'text-white');
+                        f.classList.add('border', 'hover:bg-gray-100');
+                    }
+                });
+                
+                // Filter projects
+                projectItems.forEach(item => {
+                    if (year === 'all' || item.getAttribute('data-year') === year) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Carousel functionality
+        const slides = document.querySelectorAll('.carousel-slide');
+        const dots = document.querySelectorAll('.carousel-dot');
+        let currentSlide = 0;
+        
+        function showSlide(index) {
+            // Reinicia o ciclo quando chega no final
+            if (index >= slides.length) index = 0;
+            if (index < 0) index = slides.length - 1;
+
+            // Remove classes ativas
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+
+            // Ativa novo slide
+            slides[index].classList.add('active');
+            dots[index].classList.add('active');
+            currentSlide = index;
+        }
+
+            // Auto-rotação com loop
+            setInterval(() => {
+                showSlide(currentSlide + 1);
+            }, 5000);
+    </script>
+<p style="border-radius: 8px; text-align: center; font-size: 12px; color: #fff; margin-top: 16px;position: fixed; left: 8px; bottom: 8px; z-index: 10; background: rgba(0, 0, 0, 0.8); padding: 4px 8px;">Made with <img src="https://enzostvs-deepsite.hf.space/logo.svg" alt="DeepSite Logo" style="width: 16px; height: 16px; vertical-align: middle;display:inline-block;margin-right:3px;filter:brightness(0) invert(1);"><a href="https://enzostvs-deepsite.hf.space" style="color: #fff;text-decoration: underline;" target="_blank" >DeepSite</a> - 🧬 <a href="https://enzostvs-deepsite.hf.space?remix=TioIcha/fuga-arquitetura" style="color: #fff;text-decoration: underline;" target="_blank" >Remix</a></p></body>
+</html>
